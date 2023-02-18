@@ -7,7 +7,6 @@ tickers = ["^GSPC", "^DJI", "^IXIC"]
 
 # Get the historical stock prices
 data = {}
-
 for i in tickers:
     name = yf.Ticker(i).info['longName'].split(",")[0]
     data[f'{name}'] = yf.download(i, period="1y").resample("D").last()
@@ -32,15 +31,14 @@ daily_returns = []
 cov = [0,0,0,0]
 var = [0,0,0,0]
 cor = [0,0,0,0]
-beta = []
 
 for i, key in enumerate(data):
     daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if _ != 0 and not math.isnan(_)])
+
     var[i] = np.var(daily_returns[i])
 
 #Display
 for i, key in enumerate(data):
     cov[i] = np.cov(daily_returns[3], daily_returns[i][:len(daily_returns[3])])[0][1]
     cor[i] = cov[i]/(math.sqrt(var[3])*math.sqrt(var[i]))
-    beta.append(cov[i]/var[i])
-    print("Beta of "f'{stock_name}'" with "f'{key}'": "f'{beta[i]}')
+    print("Correlation of "f'{stock_name}'" with "f'{key}'": "f'{cor[i]}')

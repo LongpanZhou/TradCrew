@@ -1,5 +1,4 @@
 import math
-
 import numpy as np
 import yfinance as yf
 
@@ -26,19 +25,16 @@ while True:
 
 #Load stock into data
 data[f'{stock_name}'] = stock_data
+cov = [0,0,0,-1]
+min_len = 365
 
 # Plot the daily percentage change
-return_change = []
+daily_returns = []
 for key in data:
-    return_change.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if _ != 0 and not math.isnan(_)])
+    daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if _ != 0 and not math.isnan(_)])
+    min_len = min(len(data[key]),min_len)
 
-#calculate cov compare to each index
-cov = [0,0,0,-1]
-
-#fix range
-return_change[0].remove()
-
-#Display matching days
+#Display
 for i, key in enumerate(data):
-    cov[i] = np.cov(return_change[3],return_change[i])[0][1]
-    print("Days matched "f'{stock_name}'" with "f'{key}'": "f'{cov[i]}')
+    cov[i] = np.cov(daily_returns[3],daily_returns[i][:min_len])[0][1]
+    print("Covariance of "f'{stock_name}'" with "f'{key}'": "f'{cov[i]}')
