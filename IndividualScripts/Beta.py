@@ -9,8 +9,8 @@ tickers = ["^GSPC", "^DJI", "^IXIC"]
 data = {}
 
 for i in tickers:
-    name = yf.Ticker(i).info['longName'].split(",")[0]
-    data[f'{name}'] = yf.download(i, period="1y").resample("D").last()
+    #name = yf.Ticker(i).info['longName'].split(",")[0]
+    data[f'{i}'] = yf.download(i, period="1y").resample("D").last()
 
 # Ask user to input
 while True:
@@ -18,8 +18,8 @@ while True:
     try:
         if stock == "Q": break
         stock_data = yf.download(stock, period="1y").resample("D").last()
-        stock_name = yf.Ticker(stock).info['longName'].split(",")[0]
-        data[f'{stock_name}'] = stock_data
+        #stock_name = yf.Ticker(stock).info['longName'].split(",")[0]
+        data[f'{stock}'] = stock_data
         break
     except:
         print("Invalid stock symbol. Please re-enter:")
@@ -35,7 +35,7 @@ cor = [0,0,0,0]
 beta = []
 
 for i, key in enumerate(data):
-    daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if _ != 0 and not math.isnan(_)])
+    daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if not math.isnan(_)])
     var[i] = np.var(daily_returns[i])
 
 #Display
@@ -43,4 +43,4 @@ for i, key in enumerate(data):
     cov[i] = np.cov(daily_returns[3], daily_returns[i][:len(daily_returns[3])])[0][1]
     cor[i] = cov[i]/(math.sqrt(var[3])*math.sqrt(var[i]))
     beta.append(cov[i]/var[i])
-    print("Beta of "f'{stock_name}'" with "f'{key}'": "f'{beta[i]}')
+    print("Beta of "f'{stock}'" with "f'{key}'": "f'{beta[i]}')

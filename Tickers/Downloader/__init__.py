@@ -1,12 +1,13 @@
 import pandas as pd
 import yfinance as yf
+from tqdm import tqdm
 import os
 
-def downloadData(tickers):
-    directory = 'Data'
+def downloadData(tickers,FolderName):
+    directory = '../Data/'f'{FolderName}'
     if not os.path.exists(directory):
         os.makedirs(directory)
-    for ticker in tickers:
+    for ticker in tqdm(tickers):
         try:
             data = yf.download(ticker,period='1y')
             file_path = os.path.join(directory, f'{ticker}.csv')

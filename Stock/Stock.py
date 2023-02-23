@@ -1,3 +1,4 @@
+import math
 import numpy as np
 import yfinance as yf
 
@@ -8,12 +9,13 @@ class Stock:
         try:
             self.data = stock_data = yf.download(self.ticker, period="1y").resample("D").last()
             self.name = yf.Ticker(self.ticker).info['longName'].split(",")[0]
-            self.pct = [_ * 100 for _ in stock_data['Adj Close'].pct_change() if _ != 0 and not np.isnan(_)]
+            self.pct = [_ * 100 for _ in stock_data['Adj Close'].pct_change() if not np.isnan(_)]
         except:
             print("Oops")
 
     def mean(self):
-        return yf.Ticker(self.ticker).info['regularMarketPrice']
+        price = [_ for _ in self.data['Adj Close'] if not math.isnan(_)]
+        return np.median(price)
 
     def var(self):
         return np.var(self.pct)
@@ -34,3 +36,31 @@ class Stock:
         if not isinstance(another_stock, Stock):
             raise TypeError('Parameter should be of type Stock')
         return self.cov(another_stock) / (np.sqrt(self.var()) * np.sqrt(another_stock.var()))
+
+    def beta(self, market):
+        tickers = ["^GSPC", "^DJI", "^IXIC"]
+        data = {}
+        daily_returns = []
+        var = [0, 0, 0]
+        cov = [0, 0, 0]
+        cor = [0, 0, 0]
+
+        for i in tickers:
+            # name = yf.Ticker(i).info['longName'].split(",")[0]
+            data[f'{i}'] = yf.download(i, period="1y").resample("D").last()
+
+        for i, key in enumerate(data):
+            daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if not math.isnan(_)])
+            var[i] = np.var(daily_returns[i])
+
+        for i, key in enumerate(data):
+            cov[i] = np.cov(self.pct, daily_returns[i])[0][1]
+            cor[i] = cov[i] / (math.sqrt(self.var()) * math.sqrt(var[i]))
+            beta.append(cov[i] / var[i])
+            print("Beta of "f'{self.ticker}'" with "f'{key}'": "f'{beta[i]}')
+
+    def negativeCorrelationFinder(self):
+        pass
+
+    def postiveCorrelationFinder(self):
+        pass

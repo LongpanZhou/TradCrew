@@ -15,8 +15,8 @@ while True:
     try:
         if stock == "Q": break
         stock_data = yf.download(stock, period="1y").resample("D").last()
-        stock_name = yf.Ticker(stock).info['longName'].split(",")[0]
-        data[f'{stock_name}'] = stock_data
+        #stock = yf.Ticker(stock).info['longName'].split(",")[0]
+        data[f'{stock}'] = stock_data
         break
     except:
         print("Invalid stock symbol. Please re-enter:")
@@ -29,10 +29,10 @@ while True:
         for i in stocks:
             if i:
                 current = i
-                current_name = yf.Ticker(i).info['longName'].split(",")[0]
-                if current_name not in data.keys():
+                #current_name = yf.Ticker(i).info['longName'].split(",")[0]
+                if current not in data.keys():
                     current_data = yf.download(i, period="1y").resample("D").last()
-                    data[f'{current_name}'] = current_data
+                    data[f'{current}'] = current_data
                 else:
                     print(f'{i}'" is already loaded in data")
             else:
@@ -44,11 +44,11 @@ while True:
 
 min_len = 365
 for i, key in enumerate(data):
-    daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if _ != 0 and not math.isnan(_)])
+    daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if not math.isnan(_)])
     min_len = min(len(daily_returns[i]),min_len)
 
 for i, key in enumerate(data):
     cov.append(np.cov(daily_returns[0], daily_returns[i][:min_len])[0][1])
     var.append(np.var(daily_returns[i]))
     cor.append(cov[i]/(math.sqrt(var[0])*math.sqrt(var[i])))
-    print("The correlation between "f'{stock_name}'" and "f'{key}'": "f'{cor[i]}')
+    print("The correlation between "f'{stock}'" and "f'{key}'": "f'{cor[i]}')

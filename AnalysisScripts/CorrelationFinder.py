@@ -1,9 +1,16 @@
-import os
+import math
+
+import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from Stock import Stock
+import sys
+import os
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-def corrFinder(s):
+from Stock.Stock import Stock
+
+def corrFinder(s: Stock):
     folder = input("Input the Stock Exchange")
     data_dir = "../Data"f'{folder}'
     types = input("Please input the type correlation looking for: Neg, Pos, Neu. (Type all 3 to diaplay all types)")
@@ -27,7 +34,16 @@ def corrFinder(s):
     for file in tdqm(csv_files):
         df = pd.read_csv(file)
         daily_returns = [_ * 100 for _ in df['Adj Close'].pct_change() if not math.isnan(_)]
+        cov = np.cov(s.pct,daily_returns)
+        var = np.var(daily_returns)
+        cor = cov/(math.sqrt(var)*s.std)
 
+        if -0.1 < cor < 0.1:
+            neu.append()
+        elif cor > 0.8:
+            pos.append()
+        elif cor > -0.8:
+            neg.append()
 
     for type in types.strip(" ").split(","):
         match type:

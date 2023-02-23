@@ -1,8 +1,8 @@
 import pandas as pd
 import yfinance as yf
-from Tickers.Downloader import downloadData
-from Tickers.Extractor import extractTickers
+from Downloader import downloadData
+from Extractor import extractTickers
 
-file = "Tickers/FTSE.csv"
+file = "NYSE.csv"
 tickers = extractTickers(file)
-downloadData(tickers)
+downloadData(tickers,"NYSE")

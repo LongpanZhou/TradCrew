@@ -7,8 +7,8 @@ tickers = ["^GSPC", "^DJI", "^IXIC"]
 # Get the historical stock prices
 data = {}
 for i in tickers:
-    name = yf.Ticker(i).info['longName'].split(",")[0]
-    data[f'{name}'] = yf.download(i, period="1y").resample("D").last()
+    #name = yf.Ticker(i).info['longName'].split(",")[0]
+    data[f'{i}'] = yf.download(i, period="1y").resample("D").last()
 
 # Ask user to input
 while True:
@@ -16,14 +16,14 @@ while True:
     try:
         if stock == "Q": break
         stock_data = yf.download(stock, period="1y").resample("D").last()
-        stock_name = yf.Ticker(stock).info['longName'].split(",")[0]
+        #stock_name = yf.Ticker(stock).info['longName'].split(",")[0]
         break
     except:
         print("Invalid stock symbol. Please re-enter:")
         print("Or type Q to quit")
 
 #Load stock into data
-data[f'{stock_name}'] = stock_data
+data[f'{stock}'] = stock_data
 
 # Plot the daily percentage change
 percent_change = []
@@ -44,4 +44,4 @@ for i in range(len(percent_change[0])):
 
 #Display matching days
 for i, key in enumerate(data):
-    print("Days matched "f'{stock_name}'" with "f'{key}'": "f'{Days[i]}')
+    print("Days matched "f'{stock}'" with "f'{key}'": "f'{Days[i]}')
