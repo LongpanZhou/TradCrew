@@ -42,13 +42,12 @@ while True:
         print(f'{current}'" is invalid")
         print("Or type Q to quit")
 
-min_len = 365
 for i, key in enumerate(data):
     daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if not math.isnan(_)])
-    min_len = min(len(daily_returns[i]),min_len)
+
 
 for i, key in enumerate(data):
-    cov.append(np.cov(daily_returns[0], daily_returns[i][:min_len])[0][1])
+    cov.append(np.cov(daily_returns[0], daily_returns[i])[0][1])
     var.append(np.var(daily_returns[i]))
     cor.append(cov[i]/(math.sqrt(var[0])*math.sqrt(var[i])))
     print("The correlation between "f'{stock}'" and "f'{key}'": "f'{cor[i]}')

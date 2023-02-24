@@ -32,9 +32,8 @@ min_len = 365
 daily_returns = []
 for key in data:
     daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if not math.isnan(_)])
-    min_len = min(len(data[key]),min_len)
 
 #Display
 for i, key in enumerate(data):
-    cov[i] = np.cov(daily_returns[3],daily_returns[i][:min_len])[0][1]
+    cov[i] = np.cov(daily_returns[3],daily_returns[i])[0][1]
     print("Covariance of "f'{stock}'" with "f'{key}'": "f'{cov[i]}')

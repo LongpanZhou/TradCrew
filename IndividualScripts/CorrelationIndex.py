@@ -34,7 +34,6 @@ cor = [0,0,0,0]
 
 for i, key in enumerate(data):
     daily_returns.append([_ * 100 for _ in data[key]['Adj Close'].pct_change() if not math.isnan(_)])
-
     var[i] = np.var(daily_returns[i])
 
 #Display

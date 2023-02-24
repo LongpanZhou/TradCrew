@@ -6,12 +6,9 @@ import yfinance as yf
 class Stock:
     def __init__(self, ticker):
         self.ticker = ticker
-        try:
-            self.data = stock_data = yf.download(self.ticker, period="1y").resample("D").last()
-            self.name = yf.Ticker(self.ticker).info['longName'].split(",")[0]
-            self.pct = [_ * 100 for _ in stock_data['Adj Close'].pct_change() if not np.isnan(_)]
-        except:
-            print("Oops")
+        self.data = yf.download(self.ticker, period="1y").resample("D").last()
+        #self.name = yf.Ticker(self.ticker).info['longName'].split(",")[0]
+        self.pct = [_ * 100 for _ in self.data['Adj Close'].pct_change() if not math.isnan(_)]
 
     def mean(self):
         price = [_ for _ in self.data['Adj Close'] if not math.isnan(_)]
@@ -63,4 +60,7 @@ class Stock:
         pass
 
     def postiveCorrelationFinder(self):
+        pass
+
+    def neutrualCorrelationFinder(self):
         pass

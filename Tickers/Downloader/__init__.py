@@ -9,7 +9,7 @@ def downloadData(tickers,FolderName):
         os.makedirs(directory)
     for ticker in tqdm(tickers):
         try:
-            data = yf.download(ticker,period='1y')
+            data = yf.download(ticker,period='1y').resample("D").last()
             file_path = os.path.join(directory, f'{ticker}.csv')
             data.to_csv(file_path)
             print(f'{ticker}.csv has been successfully saved.')
