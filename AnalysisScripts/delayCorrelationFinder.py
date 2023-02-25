@@ -13,7 +13,7 @@ from Stock.Stock import Stock
 def delayedCorrFinder(s: Stock):
     folder = input("Input the Stock Exchange: ")
     data_dir = "../Data/"f'{folder.upper()}'
-    days = input("Input the number of days you want to perform the delayed analysis")
+    days = int(input("Input the number of days you want to perform the delayed analysis: ")) + 1
     save = input("Please input if you want to save to a save: Y/N ")
     if save.upper() == "Y":
         path = input("Please input path you wanted to be saved in: ")
@@ -36,19 +36,17 @@ def delayedCorrFinder(s: Stock):
 
     for day in tqdm(range(days)):
         pos.append([])
-        for i, file in enumerate(csv_files):
+        for i, file in tqdm(enumerate(csv_files)):
             df = pd.read_csv(file)
             daily_returns = [_ * 100 for _ in df['Adj Close'].pct_change() if not math.isnan(_)]
             daily_returns = daily_returns[day:]
             try:
-                print(len(s.pct[:len(s.pct)-day]))
-                print(len(daily_returns))
                 cov = np.cov(s.pct[:len(s.pct)-day], daily_returns)[0][1]
                 var = np.var(daily_returns)
                 cor = cov / (math.sqrt(var) * math.sqrt(np.var(s.pct[:len(s.pct)-days])))
-                print(f"Processing {file} with {day} delayed")
+                print(f"Processing {file} with {day} day delayed")
 
-                if cor > 0.85:
+                if cor > 0.80:
                     pos[day].append(tickers[i])
             except:
                 print(f"Skipping {file}")
@@ -63,9 +61,8 @@ def delayedCorrFinder(s: Stock):
         except:
             print("Failed to save")
 
+    return pos
+
 def save_file(YN,correlation,file_path):
     if YN.upper() == "Y":
         pd.DataFrame(correlation).to_csv(file_path)
-
-AAPL = Stock("AAPL")
-delayedCorrFinder(AAPL)
