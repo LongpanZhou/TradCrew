@@ -4,12 +4,6 @@ import pandas as pd
 import pandas_ta as ta
 import yfinance as yf
 from sklearn.preprocessing import MinMaxScaler
-import os
-import sys
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.dirname(SCRIPT_DIR))
-from Stock.Stock import Stock
-
 
 import tensorflow as tf
 import keras
@@ -95,6 +89,3 @@ def pricePred(s: Stock, years):
     plt.plot(Y_pred, label='Prediction')
     plt.legend()
     plt.show()
-
-AAPL = Stock("AAPL")
-pricePred(AAPL, 10)
