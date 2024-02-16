@@ -2,9 +2,9 @@ import math
 import numpy as np
 import pandas as pd
 import pandas_ta as ta
+import yfinance as yf
 from tqdm import tqdm
 import sys
-import time
 import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
@@ -39,4 +39,4 @@ def add_ema_singal(df, backcandles):
             print("Stock is equal to EMA")
             ema_singal[row] = -1
         elif upt == 1: ema_singal[row] = 2
-        elif dnt == 1: emasignal[row] = 1
+        elif dnt == 1: ema_singal[row] = 1

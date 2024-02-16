@@ -4,21 +4,25 @@ import pandas as pd
 from tqdm import tqdm
 import sys
 import time
+
 import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
+import warnings
+warnings.filterwarnings("ignore", message="The default fill_method='pad' in Series.pct_change is deprecated.*")
+
 from Stock.Stock import Stock
 
-def delayedCorrFinder(s: Stock):
+def delayedCorrFinder(s: Stock, dir):
     folder = input("Input the Stock Exchange: ")
-    data_dir = "../Data/"f'{folder.upper()}'
+    data_dir = f'{dir}/{folder.upper()}'
     days = int(input("Input the number of days you want to perform the delayed analysis: ")) + 1
     save = input("Please input if you want to save to a save: Y/N ")
     if save.upper() == "Y":
         path = input("Please input path you wanted to be saved in: ")
         if not os.path.exists(path):
-            path = "../Analysis"
+            path = "Analysis"
             print("Path does not exist. Default to \"Analysis\" folder.")
         if not os.path.exists(path):
             os.makedirs(path)

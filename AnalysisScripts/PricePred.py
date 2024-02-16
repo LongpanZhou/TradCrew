@@ -1,16 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import pandas as pd
 import pandas_ta as ta
 import yfinance as yf
-from sklearn.preprocessing import MinMaxScaler
 
-import tensorflow as tf
-import keras
+from sklearn.preprocessing import MinMaxScaler
 from keras.layers import *
 from keras.models import Sequential, Model
 from keras import optimizers
-from keras.callbacks import History
+
+from Stock import Stock
 
 def pricePred(s: Stock, years):
     #download data
@@ -61,8 +59,6 @@ def pricePred(s: Stock, years):
     Y_train, Y_test, Y_final = Y, Y, Y[len(Y)-1:]
 
     #Setting up neural network
-    np.random.seed(10)
-
     lstm_input = Input(shape=(backcandles, 8), name='lstm_input')
     inputs = LSTM(150, name='first_layer')(lstm_input)
     inputs = Dense(1, name='dense_layer')(inputs)
@@ -87,5 +83,8 @@ def pricePred(s: Stock, years):
     plt.figure(figsize=(16,8))
     plt.plot(Y_test, label='Actual')
     plt.plot(Y_pred, label='Prediction')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.title(f'{s.ticker} - {years} year(s)')
     plt.legend()
     plt.show()

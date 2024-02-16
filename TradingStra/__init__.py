@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from backtesting import Strategy
 
 class Context():
 

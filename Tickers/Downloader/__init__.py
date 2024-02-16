@@ -1,4 +1,3 @@
-import pandas as pd
 import yfinance as yf
 from tqdm import tqdm
 import os
@@ -12,6 +11,6 @@ def downloadData(tickers,FolderName):
             data = yf.download(ticker,period='1y').resample("D").last()
             file_path = os.path.join(directory, f'{ticker}.csv')
             data.to_csv(file_path)
-            print(f'{ticker}.csv has been successfully saved.')
+            print(f'\n{ticker}.csv has been successfully saved.')
         except:
-            print("Error occurred during downloading/saving "f'{ticker}'".csv")
+            print("\nError occurred during downloading/saving "f'{ticker}'".csv")

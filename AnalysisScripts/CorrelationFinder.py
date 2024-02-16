@@ -4,16 +4,20 @@ import pandas as pd
 from tqdm import tqdm
 import sys
 import time
+
 import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
+import warnings
+warnings.filterwarnings("ignore", message="The default fill_method='pad' in Series.pct_change is deprecated.*")
+
 from Stock.Stock import Stock
 
-def corrFinder(s: Stock):
+def corrFinder(s: Stock, dir):
     folder = input("Input the Stock Exchange: ")
-    data_dir = "../Data/"f'{folder.upper()}'
-    types = input("Please input the type correlation looking for: Neg, Pos, Neu. (Type all 3 to display all types) ")
+    data_dir = f'{dir}/{folder.upper()}'
+    types = input("Please input the type correlation looking for: Pos, Neu, Neg. (Type all 3 to display all types) ")
     save = input("Please input if you want to save to a save: Y/N ")
     if save.upper() == "Y":
         path = input("Please input path you wanted to be saved in: ")
@@ -54,27 +58,27 @@ def corrFinder(s: Stock):
         except:
             print(f"Skipping {file}")
 
-    for corType in types.upper().strip(" ").split(","):
+    for corType in types.upper().split(", "):
         match corType:
-            case "NEG":
-                print(f'Negtive Correlated Stocks:{neg}')
-                try:
-                    file_path = os.path.join(path,f'{s.ticker}_{folder}_Neg.csv')
-                    save_file(save,neg,file_path)
-                except:
-                    print("Failed to save")
             case "POS":
-                print(f'Negtive Correlated Stocks:{pos}')
+                print(f'Positive Correlated Stocks:{pos}')
                 try:
                     file_path = os.path.join(path, f'{s.ticker}_{folder}_Pos.csv')
                     save_file(save, pos, file_path)
                 except:
                     print("Failed to save")
             case "NEU":
-                print(f'Negtive Correlated Stocks:{neu}')
+                print(f'Neural Correlated Stocks:{neu}')
                 try:
                     file_path = os.path.join(path, f'{s.ticker}_{folder}_Neu.csv')
                     save_file(save, neu, file_path)
+                except:
+                    print("Failed to save")
+            case "NEG":
+                print(f'Negative Correlated Stocks:{neg}')
+                try:
+                    file_path = os.path.join(path,f'{s.ticker}_{folder}_Neg.csv')
+                    save_file(save,neg,file_path)
                 except:
                     print("Failed to save")
 

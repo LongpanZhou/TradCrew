@@ -1,2 +1,15 @@
+#Stock class, Tickers, Indivual Scripts, (Part) AnalysisScripts
+numpy
 pandas
 yfinance
+tqdm
+
+#Trading Stra, PricePred
+matplotlib
+pandas_ta
+backtesting
+tensorflow
+#Legacy
+sklearn
+#Present
+scikit-learn
