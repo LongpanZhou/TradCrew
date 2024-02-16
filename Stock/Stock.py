@@ -34,7 +34,7 @@ class Stock:
             raise TypeError('Parameter should be of type Stock')
         return self.cov(another_stock) / (np.sqrt(self.var()) * np.sqrt(another_stock.var()))
 
-    def beta(self, market):
+    def beta(self):
         tickers = ["^GSPC", "^DJI", "^IXIC"]
         data = {}
         daily_returns = []

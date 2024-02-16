@@ -13,7 +13,7 @@ from Stock.Stock import Stock
 def corrFinder(s: Stock):
     folder = input("Input the Stock Exchange: ")
     data_dir = "../Data/"f'{folder.upper()}'
-    types = input("Please input the type correlation looking for: Neg, Pos, Neu. (Type all 3 to diaplay all types) ")
+    types = input("Please input the type correlation looking for: Neg, Pos, Neu. (Type all 3 to display all types) ")
     save = input("Please input if you want to save to a save: Y/N ")
     if save.upper() == "Y":
         path = input("Please input path you wanted to be saved in: ")
