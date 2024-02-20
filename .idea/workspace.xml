@@ -5,27 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e14cec40-9ca2-4ae7-b1ee-47b1af7870f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Images/PricePrediction.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/TradCrew.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TradCrew.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pythonProject.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnalysisScripts/CorrelationFinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnalysisScripts/CorrelationFinder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnalysisScripts/delayCorrelationFinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnalysisScripts/DelayCorrelationFinder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnalysisScripts/pricePred.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnalysisScripts/PricePred.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/TestMain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tickers/Demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tickers/Demo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tickers/Downloader/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tickers/Downloader/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tickers/Extractor/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Tickers/Extractor/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnalysisScripts/PricePred.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnalysisScripts/PricePred.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TradingStra/Hedge.py" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStra/Hedge.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TradingStra/RSI_long.py" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStra/RSI_long.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TradingStra/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/TradingStra/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +34,8 @@
   "keyToString": {
     "Python.CorrelationFinder.executor": "Run",
     "Python.Demo.executor": "Run",
+    "Python.Hedge.executor": "Run",
+    "Python.RSI_long.executor": "Run",
     "Python.TestMain.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -62,7 +48,7 @@
       <recent name="$PROJECT_DIR$/Images" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.TestMain">
+  <component name="RunManager" selected="Python.Hedge">
     <configuration name="CorrelationFinder" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TradCrew" />
       <option name="ENV_FILES" value="" />
@@ -107,6 +93,50 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Hedge" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TradCrew" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TradingStra" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TradingStra/Hedge.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RSI_long" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="TradCrew" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TradingStra" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TradingStra/RSI_long.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="TestMain" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TradCrew" />
       <option name="ENV_FILES" value="" />
@@ -131,6 +161,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Hedge" />
+        <item itemvalue="Python.RSI_long" />
         <item itemvalue="Python.TestMain" />
         <item itemvalue="Python.CorrelationFinder" />
         <item itemvalue="Python.Demo" />

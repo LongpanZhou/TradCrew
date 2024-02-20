@@ -17,8 +17,8 @@ def pricePred(s: Stock, years):
     #add indicators to data
     data['RSI'] = ta.rsi(data.Close, length=15)
     data['EMAF'] = ta.ema(data.Close, length=20)
-    data['EMAM']=ta.ema(data.Close, length=100)
-    data['EMAS']=ta.ema(data.Close, length=150)
+    data['EMAM'] = ta.ema(data.Close, length=100)
+    data['EMAS'] = ta.ema(data.Close, length=150)
 
     #add target values to data
     data['Target'] = data['Adj Close']-data.Open

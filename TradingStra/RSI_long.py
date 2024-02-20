@@ -1,9 +1,5 @@
-import math
-import numpy as np
-import pandas as pd
 import pandas_ta as ta
 import yfinance as yf
-from tqdm import tqdm
 import sys
 import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))

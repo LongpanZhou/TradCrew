@@ -1,12 +1,9 @@
 import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
 import pandas_ta as ta
 import yfinance as yf
 
 from backtesting import Strategy
 from backtesting import Backtest
-import backtesting
 
 data = yf.download("EURUSD=X",period='60d',interval='5m')
 
@@ -14,7 +11,7 @@ data = yf.download("EURUSD=X",period='60d',interval='5m')
 grid_distance = 0.005
 midprice = 1.065
 
-#generate a grid from 0.965-1.165 with 0.005distance
+#generate a grid from 0.965-1.165 with 0.005 distance
 def generate_grid(midprice, grid_distance, grid_range):
     return(np.arange(midprice-grid_range,midprice+grid_range,grid_distance))
 
@@ -47,7 +44,7 @@ class GridHedge(Strategy):
         slatr = 1.5*grid_distance
         Ratio = 0.5
 
-        if self.signal==1 and len(self.trades)<=100:
+        if self.signal==1 and len(self.trades) <= 100:
             #short position
             sl1 = self.data.Close[-1] + slatr
             tp1 = self.data.Close[-1] - slatr*Ratio
@@ -61,5 +58,4 @@ class GridHedge(Strategy):
 #running simulation
 bt = Backtest(dfpl, GridHedge, cash=1000, margin=1/100, commission=.0005, hedging=True, exclusive_orders=False)
 stat = bt.run()
-stat
 print(stat)

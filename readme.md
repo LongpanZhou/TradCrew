@@ -98,8 +98,21 @@ The project includes 4 parts, AnalysisScripts, IndividualScripts, Stock, Tickers
     Day 20:[]
     ```
   * PricePrediction
-  <br/>This script is used to predict the stock price of the next day using machine learning... (To be continue)
-  <br/><br/>Usage:
+  <br/>This script is used to predict the stock price of the next day using machine learning, It uses 15 days of back candles as data for the next predicting.
+  It uses mean squared error (MSE) as the loss function, Adam optimizer for training and linear activation function. The model is trained for 30 epochs with a batch size of 15 and 10% of the training data is used for validation.
+    <br/><br/>Neural Network:
+    ```python
+    #Setting up neural network
+    lstm_input = Input(shape=(backcandles, 8), name='lstm_input')
+    inputs = LSTM(150, name='first_layer')(lstm_input)
+    inputs = Dense(1, name='dense_layer')(inputs)
+    output = Activation('linear', name='output')(inputs)
+    model = Model(inputs=lstm_input, outputs=output)
+    adam = optimizers.Adam()
+    model.compile(optimizer=adam, loss='mse')
+    model.fit(x=X_train, y=Y_train, batch_size=15, epochs=30, shuffle=True, validation_split = 0.1)
+    ```
+    Usage:
     ```python
     from Stock.Stock import Stock
     from AnalysisScripts.PricePred import pricePred
@@ -120,16 +133,15 @@ The project includes 4 parts, AnalysisScripts, IndividualScripts, Stock, Tickers
 ### IndividualScripts
 Under this folder are indivual script which can run using Python:
 `python *.py`
-* Beta
-  <br/>Calculate the market beta comparing with S&P 500, Dow Jones, and Nasdaq Index.
-* CorrelationIndex
-* CorrelationStocks
-* Covariance
-* Mean
-* PatternMatchingIndex
-* PercentageChangeD
-* PercentageChangeY
-* Variance
+* Beta: Calculate the market beta comparing with S&P 500, Dow Jones, and Nasdaq Index.
+* CorrelationIndex: Calculate the correlation with markets by comparing with S&P 500, Dow Jones, and Nasdaq Index.
+* CorrelationStocks: Calculate the correlation with another stock (ticker).
+* Covariance: Calculate the covariance of a stock.
+* Mean: Calculate the mean price of a stock.
+* PatternMatchingIndex: Calculate the number of days ptc changes that matched with market.
+* PercentageChangeD: Calculate and plot the daily changes of a stock.
+* PercentageChangeY: Calculate and plot the yearly changes of a stock.
+* Variance: Calculate the variance of a stock.
 
 ### Stock
 * Stock Class
@@ -175,11 +187,56 @@ Under this folder are indivual script which can run using Python:
 * .CSV Files
 <br/> Some of the .csv files are given in the project folder, for example FTSE.csv, Nasdaq.csv, NYSE.csv etc. Users can also download these ticker csv files from online. (make sure to change column name to `Ticker`)
 ### TradingStra
-  * Hedge
-  * RSI Long
+* Hedge:
+<br/>A class  implementing a grid-based hedging approach for trading the EUR/USD currency pair. It generates a grid of price levels around a midprice and opens positions based on specific conditions. Short positions are initiated when the signal is 1 and the number of trades is less than or equal to 100. Simultaneously, long positions are also opened.
+<br/> Usage:
+    ```python
+    from backtesting import Strategy
+    from backtesting import Backtest
+    
+    bt = Backtest(dfpl, GridHedge, cash=1000, margin=1/100, commission=.0005, hedging=True, exclusive_orders=False)
+    stat = bt.run()
+    ```
+    Output:
+    ```
+    [*********************100%%**********************]  1 of 1 completed
+     Start                     2023-11-29 01:20...
+    End                       2024-02-20 04:15...
+    Duration                     83 days 02:55:00
+    Exposure Time [%]                   98.440926
+    Equity Final [$]                  1002.619172
+    Equity Peak [$]                   1006.984864
+    Return [%]                           0.261917
+    Buy & Hold Return [%]               -2.208577
+    Return (Ann.) [%]                    1.221519
+    Volatility (Ann.) [%]                6.575708
+    Sharpe Ratio                         0.185762
+    Sortino Ratio                        0.317436
+    Calmar Ratio                           0.2837
+    Max. Drawdown [%]                   -4.305667
+    Avg. Drawdown [%]                   -0.614941
+    Max. Drawdown Duration       45 days 06:05:00
+    Avg. Drawdown Duration        5 days 12:43:00
+    # Trades                                 1268
+    Win Rate [%]                        71.214511
+    Best Trade [%]                       0.498107
+    Worst Trade [%]                     -0.908333
+    Avg. Trade [%]                       0.002879
+    Max. Trade Duration          10 days 23:35:00
+    Avg. Trade Duration           2 days 05:23:00
+    Profit Factor                         1.01897
+    Expectancy [%]                       0.003978
+    SQN                                  0.288167
+    _strategy                           GridHedge
+    _equity_curve                             ...
+    _trades                         Size  Entr...
+    dtype: object
+    ```
+* RSI Long
+  <br/>To be continued...
 
 ### TODOS:
 - [x] Fix venv Python 3.10+
-- [ ] Finish readme.md
-- [ ] Add more trading Strategy
+- [x] Finish readme.md
 - [ ] Finish correlation finders
+- [ ] Add more trading Strategy and fix structure
